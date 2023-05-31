@@ -1,0 +1,19 @@
+# This file is for config Embedded Web Server
+server:
+  port: 8080 # port that wanna run the server
+
+spring:
+  datasource: # factory for connections to the physical DB that we gonna use
+    url: jdbc:postgresql://localhost:5332/customer #url of accessing DB /customer is the DB name.
+    username: user # same as docker-compose
+    password: password # same as docker-compose
+  jpa: # JPA is the magic that let up map class to DB. So we don't have to write SQL code like SELECT * FROM customer.
+    hibernate: # This get execute everytime the server starts
+      ddl-auto: create-drop # destroy the schema at the end of the session
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect #using PostgreSQL dialect
+        format_sql: true # want to format SQL
+    show_sql: true #want to show SQL
+  main:
+    web-application-type: servlet # this will not run server when the spring boot application is run. The default of this value is servlet
